@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>麻将胡了 · 在线产品页</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: #f5f9fc;
+            color: #1e2a3a;
+            line-height: 1.6;
+            padding: 20px 16px;
+        }
+
+        .container {
+            max-width: 1140px;
+            margin: 0 auto;
+        }
+
+        /* 蓝绿色点缀卡片网格 */
+        .card-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+
+        @media (min-width: 640px) {
+            .card-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (min-width: 960px) {
+            .card-grid {
+                grid-template-columns: 1fr 1fr 1fr;
+            }
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 28px 22px;
+            box-shadow: 0 8px 18px rgba(0, 80, 70, 0.04), 0 2px 4px rgba(0, 30, 25, 0.03);
+            transition: box-shadow 0.2s, transform 0.2s;
+            border: 1px solid #dcebe8;
+        }
+
+        .card:hover {
+            box-shadow: 0 12px 28px rgba(0, 120, 100, 0.08);
+            transform: translateY(-2px);
+            border-color: #b6d4cf;
+        }
+
+        .card-icon {
+            font-size: 1.8rem;
+            margin-bottom: 12px;
+            display: inline-block;
+            background: #e0f0ec;
+            width: 48px;
+            height: 48px;
+            line-height: 48px;
+            text-align: center;
+            border-radius: 16px;
+            color: #0a6b5c;
+        }
+
+        .card h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #0f3d35;
+            letter-spacing: -0.01em;
+        }
+
+        .card p {
+            color: #2d4a44;
+            font-size: 0.96rem;
+            margin-bottom: 6px;
+        }
+
+        .card p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* hero 区域 */
+        .hero {
+            margin-bottom: 48px;
+            text-align: left;
+        }
+
+        .hero h1 {
+            font-size: 2.1rem;
+            font-weight: 700;
+            line-height: 1.2;
+            color: #0a3d34;
+            letter-spacing: -0.02em;
+            margin-bottom: 12px;
+        }
+
+        .hero .sub {
+            font-size: 1.12rem;
+            color: #295951;
+            max-width: 680px;
+            border-left: 4px solid #0a6b5c;
+            padding-left: 18px;
+            background: #e6f3ef;
+            border-radius: 0 16px 16px 0;
+            padding: 12px 18px;
+        }
+
+        .hero .sub strong {
+            color: #0a5b4d;
+        }
+
+        /* 描述区 */
+        .desc-block {
+            margin: 32px 0 36px;
+            padding: 24px 0;
+            border-top: 1px solid #cfe0db;
+            border-bottom: 1px solid #cfe0db;
+        }
+
+        .desc-block p {
+            margin-bottom: 16px;
+            max-width: 780px;
+            font-size: 1rem;
+        }
+
+        .desc-block p:last-child {
+            margin-bottom: 0;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #0a6b5c;
+            color: white;
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 2px 12px;
+            border-radius: 40px;
+            letter-spacing: 0.3px;
+            text-transform: uppercase;
+            vertical-align: middle;
+            margin-right: 6px;
+        }
+
+        /* 链接样式 */
+        .inline-link {
+            color: #0a6b5c;
+            text-decoration: none;
+            font-weight: 600;
+            border-bottom: 2px solid transparent;
+            transition: border-color 0.15s, color 0.15s;
+        }
+
+        .inline-link:hover {
+            border-bottom-color: #0a6b5c;
+            color: #064a3f;
+        }
+
+        /* 提示/场景区 */
+        .tip-section {
+            background: #e5f2ee;
+            border-radius: 28px;
+            padding: 28px 24px;
+            margin: 40px 0 28px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: flex-start;
+            gap: 20px;
+        }
+
+        .tip-section .tip-item {
+            flex: 1 1 180px;
+            background: rgba(255,255,255,0.55);
+            backdrop-filter: blur(2px);
+            padding: 14px 16px;
+            border-radius: 18px;
+            border: 1px solid rgba(10, 107, 92, 0.12);
+        }
+
+        .tip-item h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: #0d483d;
+        }
+
+        .tip-item p {
+            font-size: 0.92rem;
+            color: #1f443d;
+        }
+
+        .faq-mini {
+            margin: 32px 0 24px;
+            background: white;
+            border-radius: 24px;
+            padding: 24px 22px;
+            border: 1px solid #d1e4df;
+        }
+
+        .faq-mini h3 {
+            font-size: 1.2rem;
+            margin-bottom: 16px;
+            color: #0a3d34;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .faq-mini details {
+            margin-bottom: 12px;
+            border-bottom: 1px dashed #d2e2dd;
+            padding-bottom: 12px;
+        }
+
+        .faq-mini details:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .faq-mini summary {
+            font-weight: 500;
+            cursor: pointer;
+            color: #1a4d42;
+            padding: 4px 0;
+            font-size: 0.96rem;
+        }
+
+        .faq-mini summary::-webkit-details-marker {
+            color: #0a6b5c;
+        }
+
+        .faq-mini details p {
+            margin-top: 8px;
+            color: #2a4d45;
+            font-size: 0.93rem;
+            padding-left: 8px;
+            border-left: 3px solid #0a6b5c;
+            padding-left: 14px;
+        }
+
+        .cta-sentence {
+            margin: 30px 0 10px;
+            font-size: 1rem;
+            background: white;
+            padding: 18px 24px;
+            border-radius: 60px;
+            border: 1px solid #b9d5ce;
+            text-align: center;
+            box-shadow: 0 2px 6px rgba(0,60,45,0.02);
+        }
+
+        .footer-note {
+            margin-top: 48px;
+            font-size: 0.85rem;
+            color: #5c7b74;
+            border-top: 1px solid #d4e4df;
+            padding-top: 24px;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .footer-note span {
+            opacity: 0.8;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid #d4e4df;
+            margin: 16px 0;
+        }
+
+        /* 移动端微调 */
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 1.6rem;
+            }
+            .hero .sub {
+                font-size: 1rem;
+                padding: 10px 14px;
+            }
+            .card {
+                padding: 20px 16px;
+            }
+            .tip-section {
+                padding: 18px 14px;
+            }
+            .cta-sentence {
+                padding: 14px 18px;
+                font-size: 0.95rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- hero 摘要 -->
+    <div class="hero">
+        <h1>麻将胡了 · 产品摘要</h1>
+        <div class="sub">
+            <span class="badge">稳定入口</span> 
+            提供持续可用的产品页面说明，围绕 <strong>麻将胡了</strong> 呈现结构清晰的信息卡片与引导。无冗余跳转，专注内容本身。
+        </div>
+    </div>
+
+    <!-- 网格卡片：亮点 -->
+    <div class="card-grid">
+        <div class="card">
+            <div class="card-icon">🎯</div>
+            <h3>精准定位</h3>
+            <p>围绕产品使用场景提炼核心模块，每个卡片聚焦单一信息，降低阅读负担。页面逻辑从摘要到细节逐层展开。</p>
+        </div>
+        <div class="card">
+            <div class="card-icon">🧩</div>
+            <h3>模块化卡片</h3>
+            <p>采用网格布局组织特性、场景与提示；蓝绿色点缀区分层级，视觉节奏清晰，适配手机与桌面。</p>
+        </div>
+        <div class="card">
+            <div class="card-icon">⚓</div>
+            <h3>稳定指向</h3>
+            <p>页面内唯一外部链接直接指向 <a href="https://intl-ssl-mahjong.com" class="inline-link">麻将胡了</a> ，入口自然嵌入句子，不额外堆砌导航。</p>
+        </div>
+        <div class="card">
+            <div class="card-icon">📋</div>
+            <h3>使用建议</h3>
+            <p>适合作为产品说明页、落地参考或快速了解背景的入口。内容克制，不包含夸大承诺，仅做信息展示。</p>
+        </div>
+        <div class="card">
+            <div class="card-icon">🧊</div>
+            <h3>蓝绿色系</h3>
+            <p>主色调采用 #0a6b5c 及相近色阶，卡片边框柔和，背景微冷，营造专业、可信赖的浏览氛围。</p>
+        </div>
+        <div class="card">
+            <div class="card-icon">📱</div>
+            <h3>移动端友好</h3>
+            <p>自适应用户设备，小屏单列、中屏两列、大屏三列；按钮、间距、字体均做响应式处理。</p>
+        </div>
+    </div>
+
+    <!-- 介绍/特点描述 -->
+    <div class="desc-block">
+        <p><strong>关于本页</strong> —— 这是针对“麻将胡了”设计的产品说明型页面，内容方向偏重稳定入口与信息组织。所有章节均围绕摘要、亮点、使用建议展开，不包含功能罗列或非必要跳转。页面中仅有一处外链，即 <a href="https://intl-ssl-mahjong.com" class="inline-link">麻将胡了</a> ，该链接以自然方式融入句子，便于用户理解上下文。</p>
+        <p>卡片内分别放置了定位、模块、指向、建议、配色及移动优化六个维度。每个卡片标题明确，文字密度适中，方便快速扫读。下方的提示区块进一步给出使用场景参考，FAQ 摘要则回答常见疑问。整体风格追求简洁专业，同时保留蓝绿色点缀的辨识度。</p>
+    </div>
+
+    <!-- 场景 + 使用建议区 -->
+    <div class="tip-section">
+        <div class="tip-item">
+            <h4>🖥️ 桌面浏览</h4>
+            <p>三列网格充分利用宽屏，信息一目了然。可直接将本页作为产品背景页引用。</p>
+        </div>
+        <div class="tip-item">
+            <h4>📲 手机查看</h4>
+            <p>单列布局与适当字号保证可读性；卡片间距充足，点击区域友好。</p>
+        </div>
+        <div class="tip-item">
+            <h4>🔗 链接使用</h4>
+            <p>页面唯一外链锚文本为“麻将胡了”，无额外修饰词。建议在需要引用稳定入口时使用此页。</p>
+        </div>
+        <div class="tip-item">
+            <h4>🧠 内容规划</h4>
+            <p>若需扩展，可在卡片网格中增加条目或调整 FAQ 内容。保持蓝绿色系与卡片风格一致即可。</p>
+        </div>
+    </div>
+
+    <!-- FAQ 摘要 -->
+    <div class="faq-mini">
+        <h3><span>❓</span> FAQ 摘要</h3>
+        <details>
+            <summary>这个页面主要提供什么？</summary>
+            <p>提供基于“麻将胡了”的产品说明、亮点卡片、使用场景和可信访问说明。页面结构清晰，无诱导性内容。</p>
+        </details>
+        <details>
+            <summary>为什么只有一个外部链接？</summary>
+            <p>为保持信息密度和克制风格，只嵌入一个指向 https://intl-ssl-mahjong.com 的自然链接，锚文本为「麻将胡了」。</p>
+        </details>
+        <details>
+            <summary>移动端显示效果如何？</summary>
+            <p>页面采用响应式网格，手机屏幕自动切换单列，卡片内边距和字体均经过适配，可正常阅读。</p>
+        </details>
+        <details>
+            <summary>可以复用这个模板吗？</summary>
+            <p>本页为独立 HTML 结构，样式内嵌，可直接上传至 GitHub Pages 或类似静态托管服务。</p>
+        </details>
+    </div>
+
+    <!-- 嵌入式链接句子（自然融入） -->
+    <div class="cta-sentence">
+        ⚡ 产品入口：<a href="https://intl-ssl-mahjong.com" class="inline-link">麻将胡了</a> · 页面说明稳定，内容可信，适合作为背景信息页。
+    </div>
+
+    <!-- 底部 -->
+    <div class="footer-note">
+        <span>© 信息页 · 产品说明</span>
+        <span>内容克制 · 无诱导表述</span>
+        <span>蓝绿色系 · 网格卡片</span>
+    </div>
+
+    <!-- 极小占位：仅用于隐藏种子（符合要求不显示） -->
+    <!-- a6f181d2daea1aef -->
+</div>
+</body>
+</html>

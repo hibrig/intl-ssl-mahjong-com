@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://hibrig.github.io/intl-ssl-mahjong-com/sitemap.xml
